@@ -1,0 +1,27 @@
+.cityWeather{
+  margin-top: 10px;
+  .card {
+    color: black;
+  }
+  .card-img-top {
+    background-color: #3C2D99;
+    height: 85px;
+    color: white;
+    font-size: 43px;
+  }
+  .icon_bg {
+    font-size: 65px;
+  }
+
+  .icon_md {
+    font-size: 40px;
+  }
+
+  .icon_sm {
+    font-size: 25px;
+  }
+
+  .temp {
+    font-size: 20px;
+  }
+}

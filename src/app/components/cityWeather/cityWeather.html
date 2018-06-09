@@ -1,0 +1,33 @@
+<div class="cityWeather">
+  <div class="card" style="width: 18rem;">
+    <div class="card-img-top text-center">
+      <span class="temp">
+        {{ ($ctrl.weather.main.temp_min).toFixed(1) }}
+        <i class="material-icons icon_sm">
+          arrow_downward
+        </i>
+      </span>
+      <span class="temp">
+        {{ ($ctrl.weather.main.temp_max).toFixed(1) }}
+        <i class="material-icons icon_sm">
+          arrow_upward
+        </i>
+      </span>
+      <img ng-src="http://openweathermap.org/img/w/{{$ctrl.weather.weather[0].icon}}.png">
+      <span class="temp">
+        {{ ($ctrl.weather.main.humidity).toFixed(1) }}%
+      </span>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">
+        <span ng-if="$ctrl.weather.tempAccuracy == 'HIGH' && $ctrl.weather.hueAccuracy == 'HIGH'">
+          <i class="material-icons">
+            looks_one
+          </i>
+        </span>
+        {{ $ctrl.weather.name }}</h5>
+      <p class="card-text">{{ $ctrl.weather.weather[0].description }}</p>
+      <a href="#" class="btn btn-primary">Info</a>
+    </div>
+  </div>
+</div>
