@@ -5,8 +5,8 @@ class weatherService {
     this.$http = $http;
     this.data = {};
     this.optimal = {
-      temp:21,
-      humidity:50
+      temp: 21,
+      humidity: 50
     }
   }
 
@@ -60,22 +60,32 @@ class weatherService {
 
   calcAccuracy(data) {
     const midAccuracy = 5;
-     data.forEach(city => {
-      city.tempAccuracy = Math.abs(city.main.temp - this.optimal.temp) >= midAccuracy ? "LOW" : "HIGH";
-      city.hueAccuracy = Math.abs(city.main.humidity - this.optimal.humidity) >= midAccuracy ? "LOW" : "HIGH";
+    const lowAccuracyArr = [],
+      highAccuracyArr = []
+    data.forEach(city => {
+      city.tempAccuracy = Math.abs(city.main.temp - this.optimal.temp) >= midAccuracy
+        ? "LOW"
+        : "HIGH";
+      city.hueAccuracy = Math.abs(city.main.humidity - this.optimal.humidity) >= midAccuracy
+        ? "LOW"
+        : "HIGH";
+      if (city.tempAccuracy == "HIGH" && city.hueAccuracy == "HIGH") {
+        highAccuracyArr.push(city);
+      } else {
+        lowAccuracyArr.push(city);
+      }
     });
-    return data;
+    return {highAccuracyArr, lowAccuracyArr};
   }
 
   orderByOptimal(data, order = 'DESC') {
-    if (!data) return;
-    data = this.calcAccuracy(data);
-    data = data.sort((bcity, acity) => {
-      return (Math.abs(bcity.main.temp - this.optimal.temp) > Math.abs(acity.main.temp - this.optimal.temp) && acity.hueAccuracy == "HIGH") ||
-        (Math.abs(bcity.main.humidity - this.optimal.humidity) > Math.abs(acity.main.humidity - this.optimal.humidity) && acity.tempAccuracy == "HIGH") ||
-        Math.abs(bcity.main.temp - this.optimal.temp) > Math.abs(acity.main.temp - this.optimal.temp)
-    })
-
+    if (!data)
+      return;
+    const {highAccuracyArr, lowAccuracyArr} = this.calcAccuracy(data);
+    data = lowAccuracyArr.sort((bcity, acity) => {
+      return (Math.abs(bcity.main.temp - this.optimal.temp) > Math.abs(acity.main.temp - this.optimal.temp) && (acity.hueAccuracy == "HIGH")) || (Math.abs(bcity.main.humidity - this.optimal.humidity) > Math.abs(acity.main.humidity - this.optimal.humidity) && (acity.tempAccuracy == "HIGH")) || Math.abs(bcity.main.temp - this.optimal.temp) > Math.abs(acity.main.temp - this.optimal.temp);
+    });
+    data = highAccuracyArr.concat(data);
     if (order == 'AESC') {
       data = data.reverse();
     }

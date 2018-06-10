@@ -1,3 +1,28 @@
 .weatherArea {
-  // color: white;
+  .background {
+    background-repeat: no-repeat;
+    background-position: center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 627px;
+    padding: 4%;
+  }
+  .img-day {
+    background-color: #2995c4;
+    background-image: url(/assets/backgrounds/day.jpg);
+  }
+  .img-day-cold {
+    background-color: #f5f6f9;
+    background-image: url(/assets/backgrounds/day-cold.jpg);
+  }
+  .img-evening {
+    background-color: #3f4346;
+    background-image: url(/assets/backgrounds/evening.jpg);
+  }
+  .img-night {
+    background-color: #070a2c;
+    background-image: url(/assets/backgrounds/night.jpg);
+  }
 }

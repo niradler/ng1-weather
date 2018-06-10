@@ -1,5 +1,5 @@
 <div class="cityWeather">
-  <div class="card" style="width: 18rem;">
+  <div class="card" style="width: 281px;">
     <div class="card-img-top text-center">
       <span class="temp">
         {{ ($ctrl.weather.main.temp_min).toFixed(1) }}
@@ -27,7 +27,6 @@
         </span>
         {{ $ctrl.weather.name }}</h5>
       <p class="card-text">{{ $ctrl.weather.weather[0].description }}</p>
-      <a href="#" class="btn btn-primary">Info</a>
     </div>
   </div>
 </div>
